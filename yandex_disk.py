@@ -15,23 +15,23 @@ class YandexDisk:
         response = get(self.BASE_URL, params=params, headers=self.__headers)
         return response.status_code == 200
 
-    def __create_folder(self, upload_file: str) -> None:
-        params = {"path": upload_file}
+    def __create_folder(self, upload_path: str) -> None:
+        params = {"path": upload_path}
         response = put(self.BASE_URL, params=params, headers=self.__headers)
         response.raise_for_status()
 
-    def __get_href_for_upload(self, upload_file: str) -> str | None:
-        upload_folders = path.split(upload_file)[0]
+    def __get_href_for_upload(self, upload_path: str) -> str | None:
+        upload_folders = path.split(upload_path)[0]
         if upload_folders and not self.__check_folder(upload_folders):
             self.__create_folder(upload_folders)
-        params = {"path": upload_file, "overwrite": "true"}
+        params = {"path": upload_path, "overwrite": "true"}
         response = get(f"{self.BASE_URL}/upload", headers=self.__headers, params=params)
         response.raise_for_status()
         data = response.json()
         return data.get('href', None)
 
-    def upload_file(self, file: str, upload_file: str) -> None:
-        href = self.__get_href_for_upload(upload_file)
+    def upload_file(self, file: str, upload_path: str) -> None:
+        href = self.__get_href_for_upload(upload_path)
         if not href:
             raise ValueError('href is empty')
         response = put(href, data=open(file, 'rb'))
