@@ -9,6 +9,7 @@ def get_most_intelligence_char(char_list):
     return char_list[0]
 
 
-chars = ['Hulk', 'Captain America', 'Thanos']
-most_intelligence = get_most_intelligence_char(chars)
-print(f"Самый умный из персонажей: {', '.join(chars)}, это - {most_intelligence['name']}")
+if __name__ == '__main__':
+    chars = ['Hulk', 'Captain America', 'Thanos']
+    most_intelligence = get_most_intelligence_char(chars)
+    print(f"Самый умный из персонажей: {', '.join(chars)}, это - {most_intelligence['name']}")
