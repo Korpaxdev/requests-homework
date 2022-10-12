@@ -1,10 +1,10 @@
 from requests import get
 
 
-def get_most_intelligence_char(chars):
+def get_most_intelligence_char(chars_names):
     response = get('https://akabab.github.io/superhero-api/api/all.json')
     response.raise_for_status()
-    char_list = [c for c in response.json() if c['name'] in chars]
+    char_list = [c for c in response.json() if c['name'] in chars_names]
     char_list.sort(key=lambda c: c['powerstats']['intelligence'], reverse=True)
     return char_list[0]
 
