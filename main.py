@@ -3,10 +3,10 @@ from yandex_disk import YandexDisk
 from stackoverflow import StackOverflow
 
 
-def get_most_intelligence_char(char_list):
+def get_most_intelligence_char(chars_names):
     response = get('https://akabab.github.io/superhero-api/api/all.json')
     response.raise_for_status()
-    char_list = [c for c in response.json() if c['name'] in char_list]
+    char_list = [c for c in response.json() if c['name'] in chars_names]
     char_list.sort(key=lambda c: c['powerstats']['intelligence'], reverse=True)
     return char_list[0]
 
