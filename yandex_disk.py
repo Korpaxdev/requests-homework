@@ -13,6 +13,8 @@ class YandexDisk:
     def __check_folder(self, upload_file: str) -> bool:
         params = {"path": upload_file}
         response = get(self.BASE_URL, params=params, headers=self.__headers)
+        if response.status_code not in (200, 404):
+            response.raise_for_status()
         return response.status_code == 200
 
     def __create_folder(self, upload_path: str) -> None:
@@ -30,7 +32,8 @@ class YandexDisk:
         data = response.json()
         return data.get('href', None)
 
-    def upload_file(self, file: str, upload_path: str) -> None:
+    def upload_file(self, file: str, upload_path: str = "") -> None:
+        upload_path = upload_path if upload_path else file
         href = self.__get_href_for_upload(upload_path)
         if not href:
             raise ValueError('href is empty')
