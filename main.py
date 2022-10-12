@@ -1,5 +1,6 @@
 from requests import get
 from yandex_disk import YandexDisk
+from stackoverflow import StackOverflow
 
 
 def get_most_intelligence_char(char_list):
@@ -21,3 +22,8 @@ if __name__ == '__main__':
     # В качестве upload_path можете указывать директорию, которой не существует.
     # Внутри стоит проверка если директории нет, он создаст ее
     ya.upload_file('test.txt', 'netology-lesson2/test.txt')
+    # Lesson_2
+    stackoverflow = StackOverflow()
+    # Формат дат %d-%m-%Y
+    questions = stackoverflow.get_questions('10-10-2022')
+    print(questions)
