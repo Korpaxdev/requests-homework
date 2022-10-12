@@ -11,10 +11,11 @@ def get_most_intelligence_char(char_list):
 
 
 if __name__ == '__main__':
+    # Lesson_1
     chars = ['Hulk', 'Captain America', 'Thanos']
     most_intelligence = get_most_intelligence_char(chars)
     print(f"Самый умный из персонажей: {', '.join(chars)}, это - {most_intelligence['name']}")
-
+    # Lesson_2
     auth_token = 'PASTE_YOUR_AUTH_TOKEN_HERE'
     ya = YandexDisk(auth_token)
     # В качестве upload_path можете указывать директорию, которой не существует.
